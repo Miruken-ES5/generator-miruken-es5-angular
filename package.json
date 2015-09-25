@@ -1,23 +1,25 @@
 {
-  "name": "generator-gulp-webapp",
-  "version": "1.0.3",
-  "description": "Scaffold out a front-end web app",
-  "license": "BSD",
-  "repository": "yeoman/generator-gulp-webapp",
-  "author": "The Yeoman Team",
+  "name": "generator-miruken-angular",
+  "version": "0.0.1",
+  "description": "Scaffold out a miruken and angualar web application",
+  "license": "MIT",
+  "repository": "miruken/generator-miruken-angular",
+  "author": "Michael Dudley and Craig Neuwirt",
   "main": "app/index.js",
   "engines": {
     "node": ">=0.10.0",
     "npm": ">=1.3"
   },
   "scripts": {
-    "test": "mocha --reporter spec --timeout 3000"
+    "test": "gulp test"
   },
   "files": [
     "app"
   ],
   "keywords": [
     "yeoman-generator",
+    "miruken",
+    "angular",
     "web",
     "app",
     "front-end",

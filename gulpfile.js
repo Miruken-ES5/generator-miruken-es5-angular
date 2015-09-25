@@ -19,5 +19,7 @@ gulp.task('test', function () {
     'test/**/*.js',
     '!test/temp/**'
   ], {read: false})
-    .pipe(mocha());
+    .pipe(mocha({
+      timeout: 3000
+    }));
 });
