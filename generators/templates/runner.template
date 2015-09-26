@@ -1,0 +1,22 @@
+new function() {
+
+  var <%= namespace %> = new base2.Package(this, {
+    name:    '<%= namespace %>',
+<% if (parent) { -%>
+    parent:  <%= parent %>,
+<% } -%>
+    imports: 'miruken.ng',
+    exports: '<%= capitalName %>'
+  });
+
+  eval(this.imports);
+
+  var <%= capitalName %> = Runner.extend({
+    constructor: function(){
+
+    }
+  });
+
+  eval(this.exports);
+
+};

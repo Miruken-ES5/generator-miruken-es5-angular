@@ -1,0 +1,29 @@
+new function() {
+
+  var <%= namespace %> = new base2.Package(this, {
+    name:    '<%= namespace %>',
+<% if (parent) { -%>
+    parent:  <%= parent %>,
+<% } -%>
+    imports: 'miruken.ioc',
+    exports: '<%= capitalName %>'
+  });
+
+  eval(this.imports);
+
+  var <%= capitalName %> = Installer.extend({
+    $inject: ['$stateProvider'],
+    constructor: function($stateProvider){
+      $stateProvider
+        .state('home', {
+            url:          '/',
+            templateUrl:  'app/home/home.html',
+            controller:   'homeController',
+            controllerAs: 'vm'
+        });
+    }
+  });
+
+  eval(this.exports);
+
+};

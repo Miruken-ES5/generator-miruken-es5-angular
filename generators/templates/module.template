@@ -1,0 +1,26 @@
+new function() {
+
+  var <%= namespace %> = new base2.Package(this, {
+    name:    '<%= namespace %>',
+<% if (parent) { -%>
+    parent:  <%= parent %>,
+<% } -%>
+    imports: 'miruken.ioc',
+    exports: '<%= capitalName %>',
+    ngModule: [
+        'ui.router'
+    ]
+  });
+
+  eval(this.imports);
+
+  var <%= capitalName %> = Installer.extend({
+    $inject: ['$urlRouterProvider'],
+    constructor: function($urlRouterProvider){
+      $urlRouterProvider.otherwise('/');
+    }
+  });
+
+  eval(this.exports);
+
+};

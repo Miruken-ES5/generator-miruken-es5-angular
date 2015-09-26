@@ -1,0 +1,20 @@
+new function() {
+
+  var <%= namespace %> = new base2.Package(this, {
+    name:    '<%= namespace %>',
+<% if (parent) { -%>
+    parent:  <%= parent %>,
+<% } -%>
+    imports: 'miruken',
+    exports: '<%= capitalName %>'
+  });
+
+  eval(this.imports);
+
+  var <%= capitalName %> = Protocol.extend({
+
+  });
+
+  eval(this.exports);
+
+};
