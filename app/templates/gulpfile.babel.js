@@ -94,7 +94,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'fonts'], () => {
+gulp.task('serve', ['styles', 'fonts', 'inject'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -107,15 +107,17 @@ gulp.task('serve', ['styles', 'fonts'], () => {
   });
 
   gulp.watch([
-    'app/*.html',
-    'app/scripts/**/*.js',
-    'app/images/**/*',
+    'src/**/*.html',
+    'src/**/*.js',
+    'src/images/**/*',
     '.tmp/fonts/**/*'
   ]).on('change', reload);
 
-  gulp.watch('app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
-  gulp.watch('app/fonts/**/*', ['fonts']);
+  gulp.watch('src/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
+  gulp.watch('src/fonts/**/*', ['fonts']);
   gulp.watch('bower.json', ['wiredep', 'fonts']);
+  gulp.watch('src/**/*.js', ['inject']);
+
 });
 
 gulp.task('serve:dist', () => {
@@ -168,4 +170,12 @@ gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
 
 gulp.task('default', ['clean'], () => {
   gulp.start('build');
+});
+
+gulp.task('inject', () => {
+  var target = gulp.src('src/index.html');
+  var sources = gulp.src(['src/app/**/*.js'], {read: false});
+
+  return target.pipe($.inject(sources))
+    .pipe(gulp.dest('src'));
 });
