@@ -16,6 +16,6 @@ describe('slug name', function () {
     var expectedAppName = 'temp';
 
     assert.fileContent('bower.json', '"name": "temp"');
-    assert.fileContent('app/index.html', '<title>temp</title>');
+    assert.fileContent('src/index.html', '<title>temp</title>');
   });
 });

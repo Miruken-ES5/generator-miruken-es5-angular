@@ -18,10 +18,6 @@ describe('Bootstrap feature', function () {
     it('shouldn\'t add jQuery explicitly as a dependency', function () {
       assert.noFileContent('bower.json', '"jquery"');
     });
-
-    it('should add the comment block', function () {
-      assert.fileContent('app/index.html', 'build:js scripts/plugins.js')
-    });
   });
 
   describe('off', function () {
@@ -38,7 +34,7 @@ describe('Bootstrap feature', function () {
     });
 
     it('shouldn\'t add the comment block', function () {
-      assert.noFileContent('app/index.html', 'build:js scripts/plugins.js')
+      assert.noFileContent('src/index.html', 'build:js scripts/plugins.js')
     });
   });
 
@@ -59,11 +55,11 @@ describe('Bootstrap feature', function () {
     });
 
     it('should output the correct <script> paths', function () {
-      assert.fileContent('app/index.html', /src=\"(.*?)\/bootstrap-sass\/assets\/javascripts\/bootstrap\//);
+      assert.fileContent('src/index.html', /src=\"(.*?)\/bootstrap-sass\/assets\/javascripts\/bootstrap\//);
     });
 
     it('should contain the font icon path variable', function () {
-      assert.fileContent('app/styles/main.scss', '$icon-font-path');
+      assert.fileContent('src/styles/main.scss', '$icon-font-path');
     });
 
     it('should correctly override bootstrap\'s bower.json', function() {
@@ -93,7 +89,7 @@ describe('Bootstrap feature', function () {
     });
 
     it('should output the correct <script> paths', function () {
-      assert.fileContent('app/index.html', /src=\"(.*?)\/bootstrap\/js\//);
+      assert.fileContent('src/index.html', /src=\"(.*?)\/bootstrap\/js\//);
     });
 
     it('should correctly override bootstrap\'s bower.json', function() {

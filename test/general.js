@@ -31,14 +31,14 @@ describe('general', function () {
       '.bowerrc',
       '.gitignore',
       '.gitattributes',
-      'app/favicon.ico',
-      'app/apple-touch-icon.png',
-      'app/robots.txt',
-      'app/index.html',
-      'app/scripts/main.js',
-      'app/styles/main.css',
-      'app/images',
-      'app/fonts',
+      'src/favicon.ico',
+      'src/apple-touch-icon.png',
+      'src/robots.txt',
+      'src/index.html',
+      'src/scripts/main.js',
+      'src/styles/main.css',
+      'src/images',
+      'src/fonts',
       'test'
     ]);
   });

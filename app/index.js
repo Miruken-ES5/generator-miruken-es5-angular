@@ -192,17 +192,17 @@ module.exports = generators.Base.extend({
     h5bp: function () {
       this.fs.copy(
         this.templatePath('favicon.ico'),
-        this.destinationPath('app/favicon.ico')
+        this.destinationPath('src/favicon.ico')
       );
 
       this.fs.copy(
         this.templatePath('apple-touch-icon.png'),
-        this.destinationPath('app/apple-touch-icon.png')
+        this.destinationPath('src/apple-touch-icon.png')
       );
 
       this.fs.copy(
         this.templatePath('robots.txt'),
-        this.destinationPath('app/robots.txt'));
+        this.destinationPath('src/robots.txt'));
     },
 
     styles: function () {
@@ -216,7 +216,7 @@ module.exports = generators.Base.extend({
 
       this.fs.copyTpl(
         this.templatePath(css),
-        this.destinationPath('app/styles/' + css),
+        this.destinationPath('src/styles/' + css),
         {
           includeBootstrap: this.includeBootstrap
         }
@@ -226,7 +226,7 @@ module.exports = generators.Base.extend({
     scripts: function () {
       this.fs.copy(
         this.templatePath('main.js'),
-        this.destinationPath('app/scripts/main.js')
+        this.destinationPath('src/scripts/main.js')
       );
     },
 
@@ -246,7 +246,7 @@ module.exports = generators.Base.extend({
 
       this.fs.copyTpl(
         this.templatePath('index.html'),
-        this.destinationPath('app/index.html'),
+        this.destinationPath('src/index.html'),
         {
           appname: this.appname,
           includeSass: this.includeSass,
@@ -273,8 +273,8 @@ module.exports = generators.Base.extend({
     },
 
     misc: function () {
-      mkdirp('app/images');
-      mkdirp('app/fonts');
+      mkdirp('src/images');
+      mkdirp('src/fonts');
     }
   },
 
@@ -306,7 +306,7 @@ module.exports = generators.Base.extend({
       directory: 'bower_components',
       exclude: ['bootstrap-sass', 'bootstrap.js'],
       ignorePath: /^(\.\.\/)*\.\./,
-      src: 'app/index.html'
+      src: 'src/index.html'
     });
 
     if (this.includeSass) {
@@ -315,7 +315,7 @@ module.exports = generators.Base.extend({
         bowerJson: bowerJson,
         directory: 'bower_components',
         ignorePath: /^(\.\.\/)+/,
-        src: 'app/styles/*.scss'
+        src: 'src/styles/*.scss'
       });
     }
   }
