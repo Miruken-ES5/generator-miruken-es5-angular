@@ -10,6 +10,12 @@ module.exports =  generators.Base.extend({
     this.argument('parent',    { type: 'string', required: false });
     this.argument('namespace', { type: 'string', required: false });
 
+    this.option('path', {
+      desc: 'Destination directory',
+      type: String,
+      defaults: ''
+    });
+
 		this.sourceRoot(path.join(this.sourceRoot(), '../../templates'));
 	},
   _prompting: function() {
@@ -55,7 +61,7 @@ module.exports =  generators.Base.extend({
   _write: function(template){
     this.fs.copyTpl(
       this.templatePath(template),
-      this.destinationPath(this.name + '.js'),
+      this.destinationPath(path.join(this.options.path, this.name + '.js')),
       {
         name:        this.name,
         capitalName: _.capitalize(this.name),

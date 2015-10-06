@@ -155,7 +155,7 @@ gulp.task('wiredep', () => {<% if (includeSass) { %>
     }))
     .pipe(gulp.dest('src/styles'));
 <% } %>
-  gulp.src('app/*.html')
+  gulp.src('src/*.html')
     .pipe(wiredep({<% if (includeBootstrap) { if (includeSass) { %>
       exclude: ['bootstrap-sass'],<% } else { %>
       exclude: ['bootstrap.js'],<% }} %>
@@ -176,6 +176,6 @@ gulp.task('inject', () => {
   var target = gulp.src('src/index.html');
   var sources = gulp.src(['src/app/**/*.js'], {read: false});
 
-  return target.pipe($.inject(sources))
+  return target.pipe($.inject(sources, { relative: true }))
     .pipe(gulp.dest('src'));
 });

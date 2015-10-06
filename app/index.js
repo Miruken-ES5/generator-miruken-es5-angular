@@ -5,12 +5,17 @@ var chalk = require('chalk');
 var wiredep = require('wiredep');
 var mkdirp = require('mkdirp');
 var _s = require('underscore.string');
+var path = require('path');
+var _ = require('lodash');
 
 module.exports = generators.Base.extend({
   constructor: function () {
     var testLocal;
 
     generators.Base.apply(this, arguments);
+
+    this.appname = _.camelCase(this.appname);
+    this.capitalName = _.capitalize(this.appname)
 
     this.option('skip-welcome-message', {
       desc: 'Skips the welcome message',
@@ -41,6 +46,17 @@ module.exports = generators.Base.extend({
     }, {
       local: testLocal
     });
+
+    this.copyWithName = function (src, dest) {
+      this.fs.copyTpl(
+        this.templatePath(src),
+        this.destinationPath(dest),
+        {
+          name: this.appname,
+          capitalName: this.capitalName
+        }
+      );
+    }
   },
 
   initializing: function () {
@@ -51,7 +67,7 @@ module.exports = generators.Base.extend({
     var done = this.async();
 
     if (!this.options['skip-welcome-message']) {
-      this.log(yosay('\'Allo \'allo! Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile to build your app.'));
+      this.log(yosay('\'Allo \'allo! Out of the box I include \rMiruken, Angular, HTML5 Boilerplate, jQuery, and a gulpfile to build your app.'));
     }
 
     var prompts = [{
@@ -171,6 +187,8 @@ module.exports = generators.Base.extend({
         bowerJson.dependencies['jquery'] = '~2.1.1';
       }
 
+      bowerJson.dependencies['miruken-angular'] = '~0.0.11';
+
       if (this.includeModernizr) {
         bowerJson.dependencies['modernizr'] = '~2.8.1';
       }
@@ -245,10 +263,11 @@ module.exports = generators.Base.extend({
       }
 
       this.fs.copyTpl(
-        this.templatePath('index.html'),
+        this.templatePath('src/index.html'),
         this.destinationPath('src/index.html'),
         {
           appname: this.appname,
+          capitalName: this.capitalName,
           includeSass: this.includeSass,
           includeBootstrap: this.includeBootstrap,
           includeModernizr: this.includeModernizr,
@@ -275,7 +294,30 @@ module.exports = generators.Base.extend({
     misc: function () {
       mkdirp('src/images');
       mkdirp('src/fonts');
+    },
+
+    mirukenScaffold: function () {
+
+      this.copyWithName(
+        'src/app/scaffoldInstaller.js',
+        'src/app/' + this.appname + 'Installer.js'
+      );
+
+      var files = [
+        'src/app/about/about.html',
+        'src/app/about/aboutController.js',
+        'src/app/about/aboutInstaller.js',
+        'src/app/home/home.html',
+        'src/app/home/homeController.js',
+        'src/app/home/homeInstaller.js',
+      ];
+
+      for(var i = 0; i < files.length; i++){
+        var file = files[i];
+        this.copyWithName(file, file);
+      }
     }
+
   },
 
   install: function () {

@@ -12,7 +12,7 @@
 
 /* Space out content a bit */
 body {
-  padding-top: 20px;
+  padding-top: 50px;
   padding-bottom: 20px;
 }
 
@@ -66,6 +66,10 @@ body {
   }
 }
 
+.home {
+  padding-top: 20px;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
@@ -89,6 +93,7 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+
 }<% } else { %>// bower:scss
 // endbower
 
