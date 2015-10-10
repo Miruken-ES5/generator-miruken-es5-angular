@@ -126,7 +126,8 @@ module.exports = generators.Base.extend({
           version: this.pkg.version,
           includeSass: this.includeSass,
           includeBootstrap: this.includeBootstrap,
-          testFramework: this.options['test-framework']
+          testFramework: this.options['test-framework'],
+          appname: this.appname
         }
       );
     },
@@ -310,6 +311,7 @@ module.exports = generators.Base.extend({
         'src/app/home/home.html',
         'src/app/home/homeController.js',
         'src/app/home/homeInstaller.js',
+        'src/app/templates.js'
       ];
 
       for(var i = 0; i < files.length; i++){

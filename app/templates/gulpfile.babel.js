@@ -164,7 +164,7 @@ gulp.task('wiredep', () => {<% if (includeSass) { %>
     .pipe(gulp.dest('src'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['lint', 'wiredep', 'inject', 'templateCache', 'html', 'images', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
@@ -174,8 +174,21 @@ gulp.task('default', ['clean'], () => {
 
 gulp.task('inject', () => {
   var target = gulp.src('src/index.html');
-  var sources = gulp.src(['src/app/**/*.js'], {read: false});
+  var sources = gulp.src([
+    'src/app/<%= appname %>Installer.js',
+    'src/app/**/*.js'
+  ], {read: false});
 
   return target.pipe($.inject(sources, { relative: true }))
     .pipe(gulp.dest('src'));
+});
+
+gulp.task('templateCache', function () {
+  console.log($.angularTemplatecache);
+  return gulp.src('src/app/**/*.html')
+    .pipe($.angularTemplatecache({
+      module: '<%= appname %>',
+      root: 'app/'
+    }))
+    .pipe(gulp.dest('.tmp/app'));
 });

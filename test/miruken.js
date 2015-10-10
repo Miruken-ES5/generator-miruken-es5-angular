@@ -25,7 +25,8 @@ describe('miruken', function () {
       'src/app/about/aboutInstaller.js',
       'src/app/home/home.html',
       'src/app/home/homeController.js',
-      'src/app/home/homeInstaller.js'
+      'src/app/home/homeInstaller.js',
+      'src/app/templates.js'
     ]);
   });
 
@@ -52,6 +53,10 @@ describe('miruken', function () {
       assert.fileContent(path, 'ng-app="temp"');
       assert.fileContent(path, '<a class="navbar-brand" href="#/">Temp</a>');
     });
+
+    it('gulpfile.bable.js', function(){
+      assert.fileContent('gulpfile.babel.js', "'src/app/tempInstaller.js',")
+    })
 
   });
 });
