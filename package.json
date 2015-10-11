@@ -1,6 +1,6 @@
 {
   "name": "generator-miruken-angular",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "Scaffold out a miruken and angualar web application",
   "license": "MIT",
   "repository": "miruken/generator-miruken-angular",
