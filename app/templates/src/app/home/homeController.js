@@ -3,7 +3,7 @@ new function() {
   var home = new base2.Package(this, {
     name:    'home',
     parent:  <%= name %>,
-    imports: 'miruken.mvc',
+    imports: 'miruken.mvc,<%= name %>.greeting',
     exports: 'HomeController'
   });
 
@@ -11,10 +11,10 @@ new function() {
 
   var HomeController = Controller.extend({
     $properties:{
-      message: 'Hello, Miruken!'
+      message: ''
     },
-    constructor: function(){
-
+    initialize: function(){
+      this.message = Greeting(this.context).message() + ', world!'
     }
   });
 

@@ -7,6 +7,7 @@ import {stream as wiredep} from 'wiredep';
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
+const fs = require('fs');
 
 gulp.task('styles', () => {<% if (includeSass) { %>
   return gulp.src('src/styles/*.scss')
@@ -94,7 +95,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'fonts', 'inject'], () => {
+gulp.task('serve', ['styles', 'fonts', 'inject', 'clearTemplate'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -191,4 +192,10 @@ gulp.task('templateCache', function () {
       root: 'app/'
     }))
     .pipe(gulp.dest('.tmp/app'));
+});
+
+gulp.task('clearTemplate', function(cb){
+  fs.writeFile('.tmp/app/templates.js',
+    '//gulp will build the templates for distribution',
+    cb);
 });

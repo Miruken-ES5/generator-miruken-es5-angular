@@ -26,7 +26,9 @@ describe('miruken', function () {
       'src/app/home/home.html',
       'src/app/home/homeController.js',
       'src/app/home/homeInstaller.js',
-      'src/app/templates.js'
+      'src/app/greeting.js',
+      'src/app/home/greetingCallbackHandler.js',
+      '.tmp/app/templates.js'
     ]);
   });
 
@@ -56,6 +58,22 @@ describe('miruken', function () {
 
     it('gulpfile.bable.js', function(){
       assert.fileContent('gulpfile.babel.js', "'src/app/tempInstaller.js',")
+    })
+
+    it('greeting.js', function(){
+      var path = 'src/app/greeting.js';
+      assert.fileContent(path, 'parent:  temp,');
+    })
+
+    it('greetingCallbackHandler.js', function(){
+      var path = 'src/app/home/greetingCallbackHandler.js';
+      assert.fileContent(path, 'parent:  temp,');
+      assert.fileContent(path, "imports: 'miruken.callback,temp.greeting',");
+    })
+
+    it('homeController.js', function(){
+      var path = 'src/app/home/homeController.js';
+      assert.fileContent(path, "imports: 'miruken.mvc,temp.greeting',")
     })
 
   });

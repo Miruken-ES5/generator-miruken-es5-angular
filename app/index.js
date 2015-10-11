@@ -311,7 +311,9 @@ module.exports = generators.Base.extend({
         'src/app/home/home.html',
         'src/app/home/homeController.js',
         'src/app/home/homeInstaller.js',
-        'src/app/templates.js'
+        'src/app/greeting.js',
+        'src/app/home/greetingCallbackHandler.js',
+        '.tmp/app/templates.js'
       ];
 
       for(var i = 0; i < files.length; i++){
